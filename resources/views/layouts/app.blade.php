@@ -14,13 +14,15 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
+    <body class="font-sans antialiased bg-gray-100">
+        <div class="min-h-screen">
+
+            <!-- Navigation -->
             <livewire:layout.navigation />
 
             <!-- Page Heading -->
             @if (isset($header))
-                <header class="bg-white shadow">
+                <header class="bg-white shadow mb-8">
                     <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                         {{ $header }}
                     </div>
@@ -29,8 +31,41 @@
 
             <!-- Page Content -->
             <main>
-                {{ $slot }}
+                <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                    {{ $slot }}
+                </div>
             </main>
         </div>
     </body>
 </html>
+
+{{-- <!DOCTYPE html>
+<html>
+
+<head>
+    <title>Event Management</title>
+    @livewireStyles
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="bg-gray-800 p-4">
+        <div class="container mx-auto flex justify-between">
+            <a href="{{ route('events.index') }}" class="text-white">Event Management</a>
+            @auth
+                <div>
+                    <span class="text-white">{{ auth()->user()->name }}</span>
+                    <a href="{{ route('logout') }}" class="text-white ml-4">Logout</a>
+                </div>
+            @endauth
+        </div>
+    </nav>
+
+    <main class="container mx-auto p-4">
+        @yield('content')
+    </main>
+
+    @livewireScripts
+</body>
+
+</html> --}}
