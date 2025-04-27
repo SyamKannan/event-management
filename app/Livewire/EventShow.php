@@ -20,6 +20,7 @@ class EventShow extends Component
         $invitation = $this->event->invitations()->where('user_id', auth()->id())->first();
         $invitation->update(['status' => 'Accepted']);
         session()->flash('message', 'Invitation accepted!');
+        session()->flash('message_type', 'success');
     }
 
     public function rejectInvitation()
@@ -27,6 +28,7 @@ class EventShow extends Component
         $invitation = $this->event->invitations()->where('user_id', auth()->id())->first();
         $invitation->update(['status' => 'Rejected']);
         session()->flash('message', 'Invitation rejected!');
+        session()->flash('message_type', 'error');
     }
 
     public function render()
