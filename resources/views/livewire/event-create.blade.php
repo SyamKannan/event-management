@@ -6,7 +6,6 @@
 
           <form wire:submit.prevent="createEvent" class="grid grid-cols-1 gap-6">
 
-              {{-- Title --}}
               <div>
                   <label class="block mb-2 text-sm font-medium text-gray-700">Title</label>
                   <input type="text" wire:model="title"
@@ -16,7 +15,6 @@
                   @enderror
               </div>
 
-              {{-- Date --}}
               <div>
                   <label class="block mb-2 text-sm font-medium text-gray-700">Date</label>
                   <input type="date" wire:model="date"
@@ -26,7 +24,6 @@
                   @enderror
               </div>
 
-              {{-- Time --}}
               <div>
                   <label class="block mb-2 text-sm font-medium text-gray-700">Time</label>
                   <input type="time" wire:model="time"
@@ -36,7 +33,6 @@
                   @enderror
               </div>
 
-              {{-- Event Type --}}
               <div>
                   <label class="block mb-2 text-sm font-medium text-gray-700">Event Type</label>
                   <select wire:model="event_type"
@@ -51,35 +47,31 @@
                   @enderror
               </div>
 
-              {{-- Event For --}}
               <div>
-                <label class="block mb-2 text-sm font-medium text-gray-700">Event For</label>
-            
-                <select wire:model="event_for_id"
-                    class="w-full rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 shadow-sm">
-            
-                    <option value="">Select User</option>
-            
-                    @if (auth()->check())
-                        <option value="{{ auth()->id() }}">Self</option>
-                    @endif
-            
-                    @foreach ($users as $user)
-                        @if (auth()->check() && auth()->id() !== $user->id)
-                            <option value="{{ $user->id }}">{{ $user->name }}</option>
-                        @endif
-                    @endforeach
-            
-                </select>
+                  <label class="block mb-2 text-sm font-medium text-gray-700">Event For</label>
 
-                @error('event_for_id')
-                    <p class="text-xs text-red-500 mt-1">{{ $message }}</p>
-                @enderror
-            </div>
-            
-            
+                  <select wire:model="event_for_id"
+                      class="w-full rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 shadow-sm">
 
-              {{-- Guidelines --}}
+                      <option value="">Select User</option>
+
+                      @if (auth()->check())
+                          <option value="{{ auth()->id() }}">Self</option>
+                      @endif
+
+                      @foreach ($users as $user)
+                          @if (auth()->check() && auth()->id() !== $user->id)
+                              <option value="{{ $user->id }}">{{ $user->name }}</option>
+                          @endif
+                      @endforeach
+
+                  </select>
+
+                  @error('event_for_id')
+                      <p class="text-xs text-red-500 mt-1">{{ $message }}</p>
+                  @enderror
+              </div>
+
               <div>
                   <label class="block mb-2 text-sm font-medium text-gray-700">Guidelines</label>
                   <textarea wire:model="event_guidelines"
@@ -89,7 +81,6 @@
                   @enderror
               </div>
 
-              {{-- Invite Users --}}
               <div>
                   <label class="block mb-2 text-sm font-medium text-gray-700">Invite Users</label>
 
@@ -97,8 +88,11 @@
                       <select wire:model="invited_users" multiple
                           class="w-full rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 shadow-sm h-48 p-2">
                           @foreach ($users as $user)
+                          @if (auth()->id() != $user->id || )
                               <option value="{{ $user->id }}">{{ $user->name }}</option>
-                          @endforeach
+                          @endif
+                      @endforeach
+                      
                       </select>
                       <p class="text-xs text-gray-500 mt-1">Hold Ctrl (Windows) or Cmd (Mac) to select multiple users.
                       </p>
@@ -108,9 +102,6 @@
                       <p class="text-xs text-red-500 mt-1">{{ $message }}</p>
                   @enderror
               </div>
-
-
-              {{-- Create Button --}}
 
               <div>
                   <button type="submit"

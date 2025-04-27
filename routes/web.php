@@ -20,6 +20,7 @@ Route::view('profile', 'profile')
 Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
     ->middleware('auth')
     ->name('logout');
+    
 require __DIR__ . '/auth.php';
 
 Route::middleware('auth')->group(function () {

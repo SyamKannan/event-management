@@ -5,16 +5,21 @@
         <form wire:submit.prevent="uploadImage" class="bg-white p-6 rounded-lg shadow space-y-4 mb-8">
             <div>
                 <label class="block text-gray-700 mb-2">Upload Image</label>
-                <input type="file" wire:model="image"
-                    class="border rounded-md p-2 w-full focus:ring focus:ring-blue-200">
+                <input type="file" wire:model="image" class="border rounded-md p-2 w-full focus:ring focus:ring-blue-200">
                 @error('image')
                     <div class="text-red-500 text-sm mt-1">{{ $message }}</div>
                 @enderror
             </div>
 
-            <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg transition">
-                Upload Image
-            </button>
+            <div>
+                <button type="submit"
+                    style="background-color: #3b82f6; color: white; padding: 8px 16px; border-radius: 4px; border: none;">
+                    Upload Image</button>
+
+            </div>
+            {{-- <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg transition">
+               
+            </button> --}}
         </form>
     @endcan
 
@@ -23,7 +28,7 @@
 
         <div class="p-8">
             <h2 class="text-3xl font-bold mb-6">Gallery for {{ $event->title }}</h2>
-        
+
             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
                 @forelse ($images as $image)
                     <div class="relative rounded overflow-hidden shadow-lg group">
@@ -35,6 +40,6 @@
                 @endforelse
             </div>
         </div>
-        
+
     </div>
 </div>
