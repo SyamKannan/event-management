@@ -49,16 +49,19 @@
         <p class="text-red-500 mt-4 font-semibold">This event has expired.</p>
     @endif
 
-    <div class="mt-6 flex items-center gap-12">
+    <div class="mt-6 flex flex-col gap-4">
 
         <a href="{{ route('events.requisitions', $event) }}"
-            class="text-blue-500 hover:text-blue-700 font-semibold underline transition duration-200"> View Requisition
-            List
+            class="text-blue-500 hover:text-blue-700 font-semibold underline transition duration-200">
+            View Requisition List
         </a>
 
         <a href="{{ route('events.gallery', $event) }}"
-            class="text-blue-500 hover:text-blue-700 font-semibold underline transition duration-200"> View Gallery
+            class="text-blue-500 hover:text-blue-700 font-semibold underline transition duration-200">
+            View Gallery
         </a>
+
     </div>
+
 
 </div>

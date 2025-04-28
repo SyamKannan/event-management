@@ -1,6 +1,12 @@
 <div class="p-8">
     <h2 class="text-3xl font-bold text-gray-800 mb-8">Gallery for {{ $event->title }}</h2>
 
+    @if (session()->has('message'))
+        <div class="alert alert-success">
+            {{ session('message') }}
+        </div>
+    @endif
+    
     @can('create', [App\Models\Gallery::class, $event])
         <form wire:submit.prevent="uploadImage" class="bg-white p-6 rounded-lg shadow space-y-4 mb-8">
             <div>
