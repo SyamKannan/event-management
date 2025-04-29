@@ -26,7 +26,7 @@ class Gallery extends Component
 
         $path = $this->image->store('gallery', 'public');
 
-        ModelsGallery::create([
+        Gallery::create([
             'event_id' => $this->event->id,
             'user_id' => auth()->id(),
             'image_path' => $path,

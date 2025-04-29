@@ -1,7 +1,11 @@
 @vite(['resources/css/app.css', 'resources/js/app.js'])
 <div class="py-6">
 
-
+    @if (session()->has('message'))
+        <div class="alert alert-success">
+            {{ session('message') }}
+        </div>
+    @endif
 
     @if ($events->isEmpty())
         <p class="text-gray-500 text-center">
