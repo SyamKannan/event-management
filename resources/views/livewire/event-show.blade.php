@@ -30,7 +30,7 @@
         <p class="text-lg"><strong>Guidelines:</strong> {{ $event->event_guidelines }}</p>
     </div>
 
-    @if ($invitation && $invitation->status === 'Pending')
+    @if ($invitation && $invitation->status === 'Pending' && !$event->isExpired())
         <div class="flex gap-4 mt-6">
             <button type="button" wire:click="acceptInvitation"
                 style="background-color: #3b82f6; color: white; padding: 8px 16px; border-radius: 4px; border: none;">

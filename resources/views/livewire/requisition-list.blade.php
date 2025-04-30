@@ -38,23 +38,29 @@
             @foreach ($items as $item)
                 @can('view', $item)
                     <div class="border rounded-lg p-4 bg-gray-50 shadow-sm">
-                        <p class="text-lg font-medium text-gray-700">{{ $item->name }} 
+                        <p class="text-lg font-medium text-gray-700">{{ $item->name }}
                             <span class="text-sm text-gray-500">({{ $item->is_public ? 'Public' : 'Private' }})</span>
                         </p>
                         <p class="text-sm text-gray-600 mt-1">
-                            Status: 
+                            Status:
                             @if ($item->claimed_by_id)
-                                <span class="text-green-600 font-semibold">Claimed by {{ $item->claimedBy->name }}</span>
+                                <span class="text-green-600 font-semibold">
+                                    Claimed by
+                                    {{ $item->claimedBy->id == auth()->id() ? 'yourself' : $item->claimedBy->name }}
+                                </span>
                             @else
                                 <span class="text-red-500 font-semibold">Unclaimed</span>
+                            @endif
+                            
+                            @if ($item->is_gift)
+                                <span class="ml-2 text-purple-600 font-semibold">(Gift)</span>
                             @endif
                         </p>
 
                         @if (
                             $item->claimed_by_id == null &&
-                            $event->invitations()->where('user_id', auth()->id())->where('status', 'Accepted')->exists() &&
-                            !$event->isExpired()
-                        )
+                                $event->invitations()->where('user_id', auth()->id())->where('status', 'Accepted')->exists() &&
+                                !$event->isExpired())
                             <button wire:click="claimItem({{ $item->id }})"
                                 style="background-color: #10b981; color: white; padding: 8px 16px; border-radius: 6px; border: none;"
                                 class="mt-4 hover:bg-green-600 transition">
